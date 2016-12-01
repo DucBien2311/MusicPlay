@@ -77,8 +77,48 @@
                                     <action selector="sld_Duration:" destination="BYZ-38-t0r" eventType="valueChanged" id="fgb-64-hb0"/>
                                 </connections>
                             </slider>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyR-Uv-qRA">
+                                <rect key="frame" x="37" y="475" width="116" height="30"/>
+                                <color key="backgroundColor" red="0.6485779881477356" green="0.72217267751693726" blue="0.92641192674636841" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="SlowlyRate"/>
+                                <connections>
+                                    <action selector="btnLowRate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MOw-qU-2H9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5lQ-xX-uAq">
+                                <rect key="frame" x="37" y="437" width="116" height="30"/>
+                                <color key="backgroundColor" red="0.6485779881477356" green="0.72217267751693726" blue="0.92641192674636841" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="FastyRate"/>
+                                <connections>
+                                    <action selector="btnFastRate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cZf-a7-86w"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ep-x7-OJh">
+                                <rect key="frame" x="157" y="513" width="116" height="30"/>
+                                <color key="backgroundColor" red="0.094952113926410675" green="0.49734443426132202" blue="0.2069699764251709" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="StopMusic"/>
+                                <connections>
+                                    <action selector="btnStop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sat-4c-sFG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Quu-Xs-kGj">
+                                <rect key="frame" x="157" y="437" width="116" height="30"/>
+                                <color key="backgroundColor" red="0.094952113926410675" green="0.49734443426132202" blue="0.2069699764251709" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="NextSong"/>
+                                <connections>
+                                    <action selector="btnNextSong:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vu5-8f-OdY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axD-I9-bVM">
+                                <rect key="frame" x="157" y="475" width="116" height="30"/>
+                                <color key="backgroundColor" red="0.094952113926410675" green="0.49734443426132202" blue="0.2069699764251709" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="PreviousSong"/>
+                                <connections>
+                                    <action selector="btnPreviousSong:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g96-LO-Qut"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="nvi-zI-vDV" secondAttribute="trailing" constant="31" id="2k9-oQ-obG"/>
@@ -102,6 +142,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnNex" destination="Quu-Xs-kGj" id="a9u-WT-eHk"/>
+                        <outlet property="btnPre" destination="axD-I9-bVM" id="GT2-YG-UKZ"/>
                         <outlet property="btn_Play" destination="KJT-He-W7m" id="OrX-B5-sCu"/>
                         <outlet property="lblCurrentTime" destination="Jg7-RC-7CL" id="1iJ-1n-VsK"/>
                         <outlet property="lblTotalTime" destination="Mvb-hd-GOX" id="lkg-Hj-IQ1"/>

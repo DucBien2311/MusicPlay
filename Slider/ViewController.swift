@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 
+
 class ViewController: UIViewController,  AVAudioPlayerDelegate{
     
     @IBOutlet weak var sld_Volume: UISlider!
@@ -18,10 +19,20 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate{
     
     @IBOutlet weak var lblTotalTime: UILabel!
     
+    @IBOutlet weak var btnPre: UIButton!
     
     @IBOutlet weak var sldDuration: UISlider!
+    
+    @IBOutlet weak var btnNex: UIButton!
+    
     var audio = AVAudioPlayer()
     var count = false
+    var rate = Float()
+    var selectedSongNumber = 0
+    var songPlayList:[String] = ["music","music1","music2"]
+    var recentSong = "music"
+    var audiorecent = 1
+    
     
     
     
@@ -29,7 +40,7 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         count = true
-        audio = try! AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("music", ofType: ".mp3")!))
+        audio = try! AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(recentSong, ofType: ".mp3")!))
         audio.prepareToPlay()
         addThumbImgForSlider()
         addDuration()
@@ -38,8 +49,56 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate{
         let timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         sldDuration.maximumValue = Float(audio.duration)
         
+        audio.enableRate = true
+        btnPre.enabled = false
     }
+    
+ 
+    
     //setup
+    func nextSong () {
+        
+        recentSong = songPlayList[selectedSongNumber + 1]
+        audio = try! AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(recentSong, ofType: ".mp3")!))
+        audio.prepareToPlay()
+        audio.play()
+        btn_Play.setImage(UIImage(named: "play.png"), forState: .Normal)
+        
+        selectedSongNumber = selectedSongNumber + 1
+        if selectedSongNumber == 2
+        {
+            btnNex.enabled = false
+        }
+        else
+        {
+            btnNex.enabled = true
+        }
+        
+        
+    }
+    func preSong()
+    {
+        
+        recentSong = songPlayList[selectedSongNumber - 1]
+        audio = try! AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(recentSong, ofType: ".mp3")!))
+        audio.prepareToPlay()
+        audio.play()
+        btn_Play.setImage(UIImage(named: "play.png"), forState: .Normal)
+        selectedSongNumber = selectedSongNumber - 1
+        btnNex.enabled = true
+        if (selectedSongNumber == 0)
+        {
+            btnPre.enabled = false
+        }
+        else
+        {
+            btnPre.enabled = true
+            
+        }
+        
+    }
+    
+    
     
     func updateTime() {
         self.lblCurrentTime.text = String(format: "%2.2f", audio.currentTime/60)
@@ -89,6 +148,13 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate{
         sld_Volume.setThumbImage(UIImage(named: "thumbHightLight.png"), forState: .Highlighted)
         
     }
+    func lowRate () {
+        audio.rate = 0.5
+    }
+    
+    func fastRate () {
+        audio.rate = 2.0
+    }
     
     @IBAction func action_Play(sender: AnyObject) {
         var play_Btn = sender as! UIButton
@@ -136,7 +202,40 @@ class ViewController: UIViewController,  AVAudioPlayerDelegate{
         
     }
     
+    @IBAction func btnLowRate(sender: AnyObject) {
+        
+        lowRate()
+    }
+    
+    @IBAction func btnFastRate(sender: AnyObject) {
+        
+        fastRate()
+    }
+    
+    @IBAction func btnStop(sender: AnyObject) {
+        
+        audio.stop()
+        audio.currentTime = 0
+        count = true
+        btn_Play.setImage(UIImage(named: "pause.png"), forState: .Normal)
+        btnPre.enabled = false
+        btnNex.enabled = true
+    }
     
     
+    @IBAction func btnNextSong(sender: AnyObject)
+    {
+        
+        nextSong()
+        btnPre.enabled = true
+        
+    }
+    
+    
+    @IBAction func btnPreviousSong(sender: AnyObject)
+    {
+        
+        preSong()
+        
+    }
 }
-
